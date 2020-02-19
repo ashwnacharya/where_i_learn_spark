@@ -1,0 +1,36 @@
+---
+
+- debug:
+    msg: "Installing Java"
+
+
+- name: Install add-apt-repostory
+  apt: 
+    name: software-properties-common
+    state: latest
+    update_cache: yes
+
+
+- name: Update cache
+  apt:
+    update_cache: yes
+
+
+- name: Install OpenJDK 8
+  apt: 
+    name: ['openjdk-8-jdk']
+    state: latest
+
+- name: Adding the path in the bashrc files
+  lineinfile: 
+    dest: /etc/environment
+    line: 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
+    insertafter: 'EOF'
+    regexp: 'export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64'
+    state: present
+
+- name: Source /etc/environment
+  shell: source /etc/environment
+  args:
+    executable: /bin/bash
+

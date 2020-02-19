@@ -1,0 +1,7 @@
+---
+
+- name: Configure the VM
+  hosts: all
+  roles:
+    - java
+  become: True
