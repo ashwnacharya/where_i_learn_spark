@@ -1,0 +1,25 @@
+---
+
+- name: Install pip3
+  apt: 
+    name: ['python3-pip']
+    state: latest
+
+- name: Create ipython directory
+  file:
+    path: /opt/ipython
+    state: directory
+    mode: '0755'
+
+- name: Install ipython
+  pip:
+    name: ipython
+    extra_args: --target=/opt/ipython
+
+- name: Add environment variables file
+  copy:
+    src: ipython-paths.sh
+    dest: /etc/profile.d/ipython-paths.sh
+    owner: root
+    group: root
+    mode: 0755
