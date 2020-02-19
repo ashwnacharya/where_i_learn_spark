@@ -1,0 +1,6 @@
+---
+
+- name: Install Scala
+  apt: 
+    name: ['scala']
+    state: latest
