@@ -1,0 +1,23 @@
+---
+
+- name: Create spark directory
+  file:
+    path: /opt/spark
+    state: directory
+    mode: '0755'
+
+
+- name: Download spark
+  unarchive:
+    src: http://apachemirror.wuchna.com/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz
+    dest: /opt/spark
+    remote_src: yes
+    creates: /opt/spark/spark-2.4.5-bin-hadoop2.7/
+
+- name: Add environment variables file
+  copy:
+    src: spark-paths.sh
+    dest: /etc/profile.d/spark-paths.sh
+    owner: root
+    group: root
+    mode: 0755
